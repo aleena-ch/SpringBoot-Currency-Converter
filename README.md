@@ -1,4 +1,4 @@
-**Currency Converter application**
+# Currency Converter application
 
 This Spring Boot application provides an API to calculate the payable amount of a bill after applying applicable discounts and converting the total amount from one currency to another using real-time exchange rate
 
