@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "36edeb5f-03c6-4032-8c35-729f3c94fa3b",
+		"name": "currencycalculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9259494"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/calculate",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"originalCurrency\": \"AED\",\n    \"targetCurrency\": \"USD\",\n    \"userType\": {\n        \"employee\": true,\n        \"affiliate\": false,\n        \"customer\": false,\n        \"tenure\": 3\n    },\n    \"items\": [\n        {\n            \"name\": \"Laptop\",\n            \"price\": 1500,\n            \"category\": \"NON_GROCERY\"\n        },\n        {\n            \"name\": \"Groceries Item 1\",\n            \"price\": 50,\n            \"category\": \"GROCERY\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/calculate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"calculate"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "for employee",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"originalCurrency\": \"USD\",\n    \"targetCurrency\": \"AED\",\n    \"userType\": {\n        \"employee\": true,\n        \"affiliate\": false,\n        \"customer\": false,\n        \"tenure\": 3\n    },\n    \"items\": [\n        {\n            \"name\": \"Laptop\",\n            \"price\": 1500,\n            \"category\": \"NON_GROCERY\"\n        },\n        {\n            \"name\": \"Groceries Item 1\",\n            \"price\": 50,\n            \"category\": \"GROCERY\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/calculate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"calculate"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "for affiliate",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"originalCurrency\": \"USD\",\n    \"targetCurrency\": \"AED\",\n    \"userType\": {\n        \"employee\": false,\n        \"affiliate\": true,\n        \"customer\": false,\n        \"tenure\": 3\n    },\n    \"items\": [\n        {\n            \"name\": \"Laptop\",\n            \"price\": 1500,\n            \"category\": \"NON_GROCERY\"\n        },\n        {\n            \"name\": \"Groceries Item 1\",\n            \"price\": 50,\n            \"category\": \"GROCERY\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/calculate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"calculate"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "for customer > 2 years",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"originalCurrency\": \"USD\",\n    \"targetCurrency\": \"AED\",\n    \"userType\": {\n        \"employee\": false,\n        \"affiliate\": false,\n        \"customer\": true,\n        \"tenure\": 3\n    },\n    \"items\": [\n        {\n            \"name\": \"Laptop\",\n            \"price\": 1500,\n            \"category\": \"NON_GROCERY\"\n        },\n        {\n            \"name\": \"Groceries Item 1\",\n            \"price\": 50,\n            \"category\": \"GROCERY\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/calculate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"calculate"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "for customer < 2 years",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"originalCurrency\": \"USD\",\n    \"targetCurrency\": \"AED\",\n    \"userType\": {\n        \"employee\": false,\n        \"affiliate\": false,\n        \"customer\": true,\n        \"tenure\": 1\n    },\n    \"items\": [\n        {\n            \"name\": \"Laptop\",\n            \"price\": 1500,\n            \"category\": \"NON_GROCERY\"\n        },\n        {\n            \"name\": \"Groceries Item 1\",\n            \"price\": 50,\n            \"category\": \"GROCERY\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/calculate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"calculate"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "total amount<100",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"originalCurrency\": \"USD\",\n    \"targetCurrency\": \"AED\",\n    \"userType\": {\n        \"employee\": true,\n        \"affiliate\": false,\n        \"customer\": false,\n        \"tenure\": 3\n    },\n    \"items\": [\n        {\n            \"name\": \"Laptop\",\n            \"price\": 10,\n            \"category\": \"NON_GROCERY\"\n        },\n        {\n            \"name\": \"Groceries Item 1\",\n            \"price\": 50,\n            \"category\": \"GROCERY\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/calculate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"calculate"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
