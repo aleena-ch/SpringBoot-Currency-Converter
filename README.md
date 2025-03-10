@@ -82,11 +82,10 @@ Request json :
 
 Here `payableAmount`: The total amount to be paid after applying the discounts
 
-Set up the Application 
+**Set up the Application** 
 
-Clone the application from github
-
-github url 
+Clone the application from **github**
+https://github.com/aleena-ch/SpringBoot-Currency-Converter
 
 **How to start the application :**
 
@@ -95,8 +94,14 @@ using maven: ./mvnw spring-boot:run
 **How to Test the endpoints:**
    You can use Postman or curl to interact with the API. Example:
 
-Using Postman:
-POST http:localhost:8080/api/calculate:
+Using **Postman**:
+* POST http:localhost:8080/api/calculate:
 
-Set the Content-Type to application/json.
-Add the JSON request body as shown in the Request Body section.
+* Set the Content-Type to application/json.
+* Add the JSON request body as shown in the Request Body section.
+
+Postman collection requests can be found in currencycalculator.postman_collection.json
+
+**Sonarqube** 
+To get a report of the code quality using sonarqube
+https://sonarcloud.io/summary/overall?id=aleena-ch_SpringBoot-Currency-Converter&branch=master
