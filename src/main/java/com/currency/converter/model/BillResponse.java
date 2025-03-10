@@ -6,7 +6,8 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Setter @Getter
+@Setter
+@Getter
 public class BillResponse {
 
     private BigDecimal payableAmount;

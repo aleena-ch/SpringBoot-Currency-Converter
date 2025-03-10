@@ -115,7 +115,7 @@ public class CurrencyConverterServiceTest {
         secondItem.setName("Vegetables");
         secondItem.setCategory(GROCERY);
         secondItem.setPrice(BigDecimal.valueOf(200));
-        List<Item> itemList =new ArrayList<>();
+        List<Item> itemList = new ArrayList<>();
         itemList.add(firstItem);
         itemList.add(secondItem);
 
