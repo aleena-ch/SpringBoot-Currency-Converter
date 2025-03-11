@@ -82,8 +82,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
             logger.info("Exchange rate from External API is:{}", exchangeRate);
 
         } catch (Exception e) {
-            logger.error("Error while processing exchange rate: {}", e.getMessage());
-            throw new ExchangeRateException("Failed to retrieve exchange rate from External API", e.getCause());
+            throw new ExchangeRateException("Failed to retrieve exchange rate from External API:" + e.getMessage());
         }
         return exchangeRate;
     }
