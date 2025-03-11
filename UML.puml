@@ -1,0 +1,78 @@
+@startuml
+
+' Interface and Class Definitions
+interface CurrencyController {
+    +getTotalAmount(billRequest: BillRequest): ResponseEntity<BillResponse>
+}
+
+class CurrencyControllerImpl {
+    -currencyExchangeService: CurrencyExchangeService
+    -discountCalculatorService: DiscountCalculatorService
+    +getTotalAmount(billRequest: BillRequest): ResponseEntity<BillResponse>
+}
+
+interface CurrencyExchangeService {
+    +getExchangeRate(originalCurrency: String, targetCurrency: String): BigDecimal
+}
+
+class CurrencyExchangeServiceImpl {
+    -restTemplate: RestTemplate
+    -apiUrl: String
+    +getExchangeRate(originalCurrency: String, targetCurrency: String): BigDecimal
+}
+
+interface DiscountCalculatorService {
+    +calculateDiscount(items: List<Item>, userType: UserType): BigDecimal
+}
+
+class DiscountCalculatorServiceImpl {
+    +calculateDiscount(items: List<Item>, userType: UserType): BigDecimal
+}
+
+' Data Classes
+class BillRequest {
+    -items: List<Item>
+    -userType: UserType
+    -originalCurrency: String
+    -targetCurrency: String
+}
+
+class BillResponse {
+    -payableAmount: BigDecimal
+    -exchangeRate: BigDecimal
+    -originalCurrency: String
+    -targetCurrency: String
+}
+
+class UserType {
+    -isAffiliate: boolean
+    -isEmployee: boolean
+    -isCustomer: boolean
+    -tenure: int
+}
+
+class Item {
+    -name: String
+    -category: Category
+    -price: BigDecimal
+}
+
+' Enum Definitions
+enum Category {
+    GROCERY
+    NON_GROCERY
+}
+
+' Relationships
+CurrencyController --> CurrencyControllerImpl
+CurrencyControllerImpl --> DiscountCalculatorService
+CurrencyControllerImpl --> CurrencyExchangeService
+CurrencyExchangeService --> CurrencyExchangeServiceImpl
+DiscountCalculatorService --> DiscountCalculatorServiceImpl
+CurrencyController --> BillRequest
+DiscountCalculatorService --> UserType
+BillResponse <-- CurrencyController
+UserType --> Item
+Item --> Category
+
+@enduml
