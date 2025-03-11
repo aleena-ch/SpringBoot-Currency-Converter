@@ -105,3 +105,9 @@ Postman collection requests can be found in currencycalculator.postman_collectio
 **Sonarqube** 
 To get a report of the code quality using sonarqube
 https://sonarcloud.io/summary/overall?id=aleena-ch_SpringBoot-Currency-Converter&branch=master
+
+**UML Diagram**
+
+UML diagram represents the classes and their relationships and can be found here
+
+https://github.com/aleena-ch/SpringBoot-Project/blob/b4202dfc0ebc957ed257554513231107f25e5dfc/UML.png
