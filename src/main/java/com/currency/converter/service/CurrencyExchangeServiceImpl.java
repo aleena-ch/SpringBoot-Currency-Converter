@@ -1,5 +1,6 @@
 package com.currency.converter.service;
 
+import com.currency.converter.config.ExchangeRateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
      * @return The exchange rate as a {@link BigDecimal}.
      */
     @Cacheable("exchangeRates")
-    public BigDecimal getExchangeRate(String originalCurrency, String targetCurrency) throws Exception {
+    public BigDecimal getExchangeRate(String originalCurrency, String targetCurrency) {
         String url = apiUrl.replace("{original_currency}", originalCurrency);
         logger.info("External URL accessed to get conversion rates:{}", url);
         BigDecimal exchangeRate;
@@ -54,13 +55,13 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
             if (responseBody == null || responseBody.isEmpty()) {
                 logger.error("Response from external API is null or empty");
-                throw new Exception("API response body is null or empty");
+                throw new ExchangeRateException("API response body is null or empty");
             }
 
             Map<String, Object> conversionRatesObj = (Map<String, Object>) responseBody.get("conversion_rates");
 
             if (conversionRatesObj == null || conversionRatesObj.isEmpty()) {
-                throw new Exception("Conversion rates are missing in the API response.");
+                throw new ExchangeRateException("Conversion rates are missing in the API response.");
             }
             logger.info("Response from external API");
 
@@ -76,13 +77,13 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
             exchangeRate = (BigDecimal) conversionRatesObj.get(targetCurrency);
 
             if (exchangeRate == null) {
-                throw new Exception("No exchange rate found for the target currency: " + targetCurrency);
+                throw new ExchangeRateException("No exchange rate found for the target currency: " + targetCurrency);
             }
             logger.info("Exchange rate from External API is:{}", exchangeRate);
 
         } catch (Exception e) {
             logger.error("Error while processing exchange rate: {}", e.getMessage());
-            throw new Exception("Failed to retrieve exchange rate from External API", e);
+            throw new ExchangeRateException("Failed to retrieve exchange rate from External API", e.getCause());
         }
         return exchangeRate;
     }

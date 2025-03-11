@@ -39,7 +39,7 @@ public class CurrencyExchangeServiceTest {
     }
 
     @Test
-    void testGetExchangeRate() throws Exception {
+    void testGetExchangeRate() {
         String originalCurrency = "USD";
         String targetCurrency = "EUR";
 

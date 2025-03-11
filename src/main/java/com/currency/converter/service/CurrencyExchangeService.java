@@ -14,5 +14,5 @@ public interface CurrencyExchangeService {
      * @param targetCurrency   The currency to which to convert.
      * @return The exchange rate as a {@link BigDecimal}.
      */
-    BigDecimal getExchangeRate(String originalCurrency, String targetCurrency) throws Exception;
+    BigDecimal getExchangeRate(String originalCurrency, String targetCurrency);
 }
