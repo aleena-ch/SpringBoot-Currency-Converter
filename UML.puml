@@ -64,15 +64,20 @@ enum Category {
 }
 
 ' Relationships
-CurrencyController --> CurrencyControllerImpl
-CurrencyControllerImpl --> DiscountCalculatorService
-CurrencyControllerImpl --> CurrencyExchangeService
-CurrencyExchangeService --> CurrencyExchangeServiceImpl
-DiscountCalculatorService --> DiscountCalculatorServiceImpl
-CurrencyController --> BillRequest
-DiscountCalculatorService --> UserType
-BillResponse <-- CurrencyController
-UserType --> Item
-Item --> Category
+CurrencyController <|-- CurrencyControllerImpl : implements
+CurrencyControllerImpl --> DiscountCalculatorService : uses
+CurrencyControllerImpl --> CurrencyExchangeService : uses
+CurrencyExchangeService <|-- CurrencyExchangeServiceImpl : implements
+DiscountCalculatorService <|-- DiscountCalculatorServiceImpl : implements
+BillRequest --> CurrencyController : uses
+BillResponse <-- CurrencyController : returns
+UserType --> DiscountCalculatorService : passed to
+UserType --> Item : owns
+Item --> Category : has
+
+' Flow of Data:
+CurrencyControllerImpl --> DiscountCalculatorService : calls calculateDiscount
+CurrencyControllerImpl --> CurrencyExchangeService : calls getExchangeRate
+CurrencyControllerImpl --> BillResponse : sets payableAmount, exchangeRate
 
 @enduml
