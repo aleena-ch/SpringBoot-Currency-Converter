@@ -41,20 +41,28 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
      * @return The exchange rate as a {@link BigDecimal}.
      */
     @Cacheable("exchangeRates")
-    public BigDecimal getExchangeRate(String originalCurrency, String targetCurrency) {
+    public BigDecimal getExchangeRate(String originalCurrency, String targetCurrency) throws Exception {
         String url = apiUrl.replace("{original_currency}", originalCurrency);
         logger.info("External URL accessed to get conversion rates:{}", url);
+        BigDecimal exchangeRate;
+        try {
+            ResponseEntity<Map<String, Object>> response = restTemplate
+                    .exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+                    });
 
-        ResponseEntity<Map<String, Object>> response = restTemplate.exchange(
-                url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
-                }
-        );
+            Map<String, Object> responseBody = response.getBody();
 
-        Map<String, Object> responseBody = response.getBody();
-        Map<String, Object> conversionRatesObj = (Map<String, Object>) responseBody.get("conversion_rates");
-        logger.info("Response from external API");
+            if (responseBody == null || responseBody.isEmpty()) {
+                logger.error("Response from external API is null or empty");
+                throw new Exception("API response body is null or empty");
+            }
 
-        if (conversionRatesObj != null) {
+            Map<String, Object> conversionRatesObj = (Map<String, Object>) responseBody.get("conversion_rates");
+
+            if (conversionRatesObj == null || conversionRatesObj.isEmpty()) {
+                throw new Exception("Conversion rates are missing in the API response.");
+            }
+            logger.info("Response from external API");
 
             for (Map.Entry<String, Object> entry : conversionRatesObj.entrySet()) {
                 String currency = entry.getKey();
@@ -65,9 +73,17 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
                     conversionRatesObj.put(currency, rateBigDecimal);  // Replace with BigDecimal
                 }
             }
+            exchangeRate = (BigDecimal) conversionRatesObj.get(targetCurrency);
+
+            if (exchangeRate == null) {
+                throw new Exception("No exchange rate found for the target currency: " + targetCurrency);
+            }
+            logger.info("Exchange rate from External API is:{}", exchangeRate);
+
+        } catch (Exception e) {
+            logger.error("Error while processing exchange rate: {}", e.getMessage());
+            throw new Exception("Failed to retrieve exchange rate from External API", e);
         }
-        BigDecimal rate = (BigDecimal) conversionRatesObj.get(targetCurrency);
-        logger.info("Exchange rate:{}", rate);
-        return rate;
+        return exchangeRate;
     }
 }
