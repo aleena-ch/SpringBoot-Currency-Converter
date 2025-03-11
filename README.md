@@ -103,8 +103,9 @@ Using **Postman**:
 Postman collection requests can be found in currencycalculator.postman_collection.json
 
 **Sonarqube** 
+
 To get a report of the code quality using sonarqube
-https://sonarcloud.io/summary/overall?id=aleena-ch_SpringBoot-Currency-Converter&branch=master
+https://sonarcloud.io/summary/new_code?id=aleena-ch_SpringBoot-Currency-Converter&branch=master
 
 **UML Diagram**
 
