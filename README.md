@@ -89,18 +89,18 @@ https://github.com/aleena-ch/SpringBoot-Currency-Converter
 
 **How to start the application :**
 
-using maven: ./mvnw spring-boot:run
+  Use maven: ./mvnw spring-boot:run
 
 **How to Test the endpoints:**
-   You can use Postman or curl to interact with the API. Example:
+   Use  Postman or curl to interact with the API. Example:
 
 Using **Postman**:
-* POST http:localhost:8080/api/calculate:
 
+* POST http:localhost:8080/api/calculate
 * Set the Content-Type to application/json.
 * Add the JSON request body as shown in the Request Body section.
 
-Postman collection requests can be found in currencycalculator.postman_collection.json
+Postman collection requests can be found in https://github.com/aleena-ch/SpringBoot-Currency-Converter/blob/master/currencycalculator.postman_collection.json
 
 **Sonarqube** 
 
