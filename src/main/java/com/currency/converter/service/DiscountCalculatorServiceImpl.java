@@ -10,11 +10,25 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Service implementation for calculating discounts based on a list of items and user type.
+ */
 @Service
 public class DiscountCalculatorServiceImpl implements DiscountCalculatorService {
 
     private static final Logger logger = LoggerFactory.getLogger(DiscountCalculatorServiceImpl.class);
 
+    /**
+     * Calculates the discount amount based on the items and user type.
+     *
+     * <p>This class implements the discount calculation logic, which includes both flat discounts
+     * (e.g., $5 for every $100 spent) and percentage discounts based on the user's type (employee,
+     * affiliate, or customer with tenure). The highest applicable discount is applied to the total amount.</p>
+     *
+     * @param items    The list of items in the bill.
+     * @param userType The user type (e.g., employee, affiliate, or customer with tenure).
+     * @return The total amount after applying discount as a {@link BigDecimal}..
+     */
     @Override
     public BigDecimal calculateDiscount(List<Item> items, UserType userType) {
 
