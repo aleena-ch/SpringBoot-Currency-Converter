@@ -110,4 +110,4 @@ https://sonarcloud.io/summary/overall?id=aleena-ch_SpringBoot-Currency-Converter
 
 UML diagram represents the classes and their relationships and can be found here
 
-https://github.com/aleena-ch/SpringBoot-Project/blob/b4202dfc0ebc957ed257554513231107f25e5dfc/UML.png
+https://github.com/aleena-ch/SpringBoot-Currency-Converter/blob/master/UML.png
